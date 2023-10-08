@@ -10,6 +10,7 @@ using namespace std;
 #define MAX_TEST_LENGTH 500000
 #define MAX_VALUE 999999999
 
+#pragma region TEST_CASES
 class TestCase
 {
     public:
@@ -20,7 +21,7 @@ class TestCase
             this->length = length;
         }
 
-        int* getArray()
+        int* getArray() const
         {
             return (int*) &(this->values[0]);
         }
@@ -78,14 +79,16 @@ vector<TestCase> generateTestCaseFromFile(string testPath)
 
     return testCases;
 }
+#pragma endregion
 
-void printVector(int* A, int length)
+#pragma region UTILS
+void printVector(int* array, int length)
 {
     cout << "[";
 
     for(int i = 0; i < length; i++)
     {
-        cout << A[i];
+        cout << array[i];
 
         if(i < length - 1)
             cout << ", ";
@@ -93,27 +96,28 @@ void printVector(int* A, int length)
 
     cout << "]";
 }
+#pragma endregion
 
-uint mergeInversions(int* A, int p, int q, int r)
+uint mergeInversions(int* array, int start, int middle, int end)
 {
-    int len_L = q - p + 1;
-    int len_R = r - q;
+    int len_L = middle - start + 1;
+    int len_R = end - middle;
 
     int i, j, k;
 
     int L[len_L], R[len_R];
 
     for(i = 0; i < len_L; i++)
-        L[i] = A[p + i];
+        L[i] = array[start + i];
     for(j = 0; j < len_R; j++)
-        R[j] = A[q + 1 + j];
+        R[j] = array[middle + 1 + j];
 
     i = j = 0;
 
     uint inversions = 0;
     bool counted = false;
 
-    for(k = p; k < r; k++)
+    for(k = start; k < end; k++)
     {
         if(!counted && R[j] < L[i])
         {
@@ -123,12 +127,12 @@ uint mergeInversions(int* A, int p, int q, int r)
 
         if(L[i] <= R[j])
         {
-            A[k] = L[i];
+            array[k] = L[i];
             i++;
         }
         else
         {
-            A[k] = R[j];
+            array[k] = R[j];
             j++;
             counted = false;
         }
@@ -137,25 +141,31 @@ uint mergeInversions(int* A, int p, int q, int r)
     return inversions;
 }
 
-uint inversionCount(int* A, int p, int r)
+uint inversionCount(int* array, int start, int end)
 {
     uint inversions = 0;
 
-    if(p < r)
+    if(start < end)
     {
-        int q = (p + r) /2;
+        int middle = (start + end) /2;
 
-        inversions += inversionCount(A, p, q);
-        inversions += inversionCount(A, q+1, r);
-        inversions += mergeInversions(A, p, q, r);
+        inversions += inversionCount(array, start, middle);
+        inversions += inversionCount(array, middle+1, end);
+        inversions += mergeInversions(array, start, middle, end);
     }
 
     return inversions;
 }
 
-int main()
+int main(int argc, char* argv[])
 {
-    vector<TestCase> testCases = generateTestCaseFromFile("personal_testcase.txt");
+    if(argc <= 1)
+    {
+        cout << "No input test case detected. Usage: './problem1 [TEST_CASE_NAME.txt]'" << endl;
+        return 1;
+    }
+    
+    vector<TestCase> testCases = generateTestCaseFromFile(argv[1]);
 
     for(int i = 0; i < testCases.size(); i++)
     {

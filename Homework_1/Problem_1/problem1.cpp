@@ -117,7 +117,7 @@ uint mergeInversions(int* array, int start, int middle, int end)
     uint inversions = 0;
     bool counted = false;
 
-    for(k = start; k < end; k++)
+    for(k = start; k <= end; k++)
     {
         if(!counted && R[j] < L[i])
         {
@@ -125,16 +125,32 @@ uint mergeInversions(int* array, int start, int middle, int end)
             counted = true;
         }
 
-        if(L[i] <= R[j])
+        if(i < len_L && j < len_R)
         {
-            array[k] = L[i];
-            i++;
+            if(L[i] <= R[j])
+            {
+                array[k] = L[i];
+                i++;
+            }
+            else
+            {
+                array[k] = R[j];
+                j++;
+                counted = false;
+            }
         }
         else
         {
-            array[k] = R[j];
-            j++;
-            counted = false;
+            if(i < len_L)
+            {
+                array[k] = L[i];
+                i++;
+            }
+            else
+            {
+                array[k] = R[j];
+                j++;
+            }
         }
     }
 
@@ -175,6 +191,8 @@ int main(int argc, char* argv[])
         printVector(actualTestCase.getArray(), actualTestCase.length);
 
         uint inversions = inversionCount(actualTestCase.getArray(), 0, actualTestCase.length - 1);
+
+        printVector(actualTestCase.getArray(), actualTestCase.length);
 
         cout << "| NUMBER OF INVERSIONS: " << inversions << endl;
     }

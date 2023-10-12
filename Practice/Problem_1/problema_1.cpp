@@ -112,6 +112,7 @@ struct TestCase
     int* array;
 };
 
+// C'è un problema con questo metodo, perché non carica i numeri a due cifre :)
 vector<TestCase> buildTestCases(string filePath)
 {
     ifstream testFile;

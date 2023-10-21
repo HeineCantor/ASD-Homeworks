@@ -42,7 +42,7 @@ def readTestFile(testPath):
     return testList
 
 if __name__ == "__main__":
-    testList = readTestFile("./testfile.txt")
+    testList = readTestFile("./test.txt")
     
     for test in testList:
         lcp = findPrefix(test, 0, len(test) - 1)

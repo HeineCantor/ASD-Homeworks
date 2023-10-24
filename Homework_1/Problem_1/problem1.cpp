@@ -175,13 +175,7 @@ uint inversionCount(int* array, int start, int end)
 
 int main(int argc, char* argv[])
 {
-    if(argc <= 1)
-    {
-        cout << "No input test case detected. Usage: './problem1 [TEST_CASE_NAME.txt]'" << endl;
-        return 1;
-    }
-    
-    vector<TestCase> testCases = generateTestCaseFromFile(argv[1]);
+    vector<TestCase> testCases = generateTestCaseFromFile("./problem1_testcase_1.txt");
 
     for(int i = 0; i < testCases.size(); i++)
     {

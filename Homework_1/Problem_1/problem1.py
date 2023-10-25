@@ -69,7 +69,7 @@ def readTestFile(testPath):
     return testsList
 
 if __name__ == "__main__":
-    testList = readTestFile("./problem1_testcase_1.txt")
+    testList = readTestFile("./test.txt")
     
     for test in testList:
         inversions = inversionCount(test, 0, len(test) - 1)

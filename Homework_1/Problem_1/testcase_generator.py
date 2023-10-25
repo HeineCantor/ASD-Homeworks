@@ -2,8 +2,8 @@ import random
 
 MAX_RAND_GENERATION = 999999999
 
-TESTCASE_PATH = "./personal_testcase.txt"
-LENGTH = 500000
+TESTCASE_PATH = "./personal_testcase_temp.txt"
+LENGTH = 10
 
 file = open(TESTCASE_PATH, "w")
 

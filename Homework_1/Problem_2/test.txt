@@ -1,4 +1,4 @@
-4
+5
 apple
 applied
 april
@@ -16,4 +16,13 @@ erudito
 stacanovista
 staccionata
 libro
+0
+armadillo
+armadillo
+armadio
+armando
+armeggiare
+arma
+armeno
+armonico
 0

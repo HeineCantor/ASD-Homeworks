@@ -11,7 +11,6 @@ int max(int a, int b, int c) {
 };
 
 
-
 int maxMidSum(int* a, int start, int mid, int end) {
 
     int sum = 0;
@@ -35,18 +34,14 @@ int maxMidSum(int* a, int start, int mid, int end) {
 };
 
 
-
 int maxSum(int* a, int start, int end) {
-
-    if (start > end)
-        return MIN;
 
     if (start == end)
         return a[start];
 
     int mid = (start + end) / 2;
 
-    return max(maxSum(a, start, mid-1), maxSum(a, mid + 1, end), maxMidSum(a, start, mid, end));
+    return max(maxSum(a, start, mid), maxSum(a, mid + 1, end), maxMidSum(a, start, mid, end));
 };
 
 
@@ -61,4 +56,3 @@ int main()
     std::cout << "max sum is: " << maxSum(array, 0, n - 1);
 
 }
-

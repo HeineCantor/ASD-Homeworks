@@ -1,6 +1,7 @@
 chessboard = []
 
 def generateChessboard(N):
+    chessboard.clear()
     for i in range(N):
         row = [False for x in range(N)]
         chessboard.append(row)
@@ -65,14 +66,28 @@ def tooManyQueensBacktrack(chessboard, k, n):
 
     return solutionsCount
 
+def readTestFile(testPath):
+    testFile = open(testPath)
+    testList = []
+
+    numberOfTests = int(testFile.readline())
+
+    for line in testFile:
+        testList.append(int(line))
+
+    return testList
+
 if __name__ == "__main__":
-    N = 8
+    testList = readTestFile("./test.txt")
 
-    generateChessboard(N)
+    for test in testList:
+        print(f"TESTING FOR {test} QUEENS.")
+        generateChessboard(test)
 
-    howManySolutions = tooManyQueensBacktrack(chessboard, 0, N)
+        howManySolutions = tooManyQueensBacktrack(chessboard, 0, test)
 
-    print(f"Solutions found: {howManySolutions}")
+        print(f"Solutions found: {howManySolutions}")
+        print("=====================================")
 
 
     

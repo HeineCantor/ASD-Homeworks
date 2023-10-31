@@ -1,3 +1,11 @@
+# -------------------ATTENZIONE---------------------------
+# 
+# La descrizione dettagliata dell'algortimo e 
+# dell'analisi di complessità si trovano nel PDF.
+# 
+# --------------------------------------------------------
+
+# Funzione Common Prefix - O(q)
 def commonPrefix(string1, string2):
     prefix = ""
 
@@ -11,6 +19,7 @@ def commonPrefix(string1, string2):
 
     return prefix
 
+# Funzione Find Prefix - O(qn)
 def findPrefix(array, start, end):
     if start == end:
         return array[start]

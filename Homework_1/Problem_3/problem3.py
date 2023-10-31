@@ -1,6 +1,14 @@
+# -------------------ATTENZIONE---------------------------
+# 
+# La descrizione dettagliata dell'algortimo
+# si trova nel PDF.
+# 
+# --------------------------------------------------------
+
 from random import randint
 
 MAX_RAND_GENERATION = 100
+NUMBER_OF_RANDOM_INSERTIONS = 15
 
 class treapNode:
     def __init__(self, key):
@@ -75,7 +83,7 @@ class treap:
 if __name__ == "__main__":
     testTreap = treap()
 
-    for i in range(15):
+    for i in range(NUMBER_OF_RANDOM_INSERTIONS):
         testTreap.insertKey(randint(0, MAX_RAND_GENERATION))
 
     testTreap.printAll()

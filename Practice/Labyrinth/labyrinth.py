@@ -45,8 +45,6 @@ def buildCandidates(path, labyrinth, k, exit):
     return candidates
 
 def labyrinthBacktrack(path, labyrinth, k, exit):
-    cadidatesForNextMove = []
-
     if(isSolutionValid(path, labyrinth, k, exit)):
         printSolution(path, labyrinth)
     else:

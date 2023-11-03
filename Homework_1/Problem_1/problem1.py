@@ -1,3 +1,11 @@
+# -------------------ATTENZIONE---------------------------
+# 
+# La descrizione dettagliata dell'algortimo e 
+# dell'analisi di complessità si trovano nel PDF.
+# 
+# --------------------------------------------------------
+
+# Funzione Merge modificata - θ(n)
 def mergeAndCount(array, start, mid, end):
     leftList = []
     rightList = []
@@ -34,6 +42,7 @@ def mergeAndCount(array, start, mid, end):
 
     return inversions
 
+# Funzione Merge Sort modificata - θ(n log(n))
 def inversionCount(array, start, end):
     inversions = 0
 
@@ -46,6 +55,7 @@ def inversionCount(array, start, end):
 
     return inversions
 
+# Funzione di lettura da file dei casi di test
 def readTestFile(testPath):
     testFile = open(testPath)
     testsList = []
@@ -68,6 +78,7 @@ def readTestFile(testPath):
 
     return testsList
 
+# Main
 if __name__ == "__main__":
     testList = readTestFile("./test.txt")
     

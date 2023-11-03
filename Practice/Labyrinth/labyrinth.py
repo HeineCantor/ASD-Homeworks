@@ -1,7 +1,7 @@
 testLabyrinth=[
     [1, 0, 0, 0],
-    [1, 1, 0, 1],
-    [0, 1, 0, 0],
+    [1, 1, 1, 1],
+    [0, 1, 0, 1],
     [1, 1, 1, 1]
 ]
 
@@ -14,38 +14,48 @@ def printLabyrinth(labyrinthMatrix):
                 print("0 ", end="")
         print("")
 
-def printSolution(solutionPath):
-    pass
+def printSolution(solutionPath, labyrinthMatrix):
+    print("LABYRINTH SOLUTION:")
+    labyrinthSize = len(labyrinthMatrix)
 
-def isSolutionValid(path, labyrinth, start, exit):
-    return start == exit
+    for i in range(labyrinthSize):
+        for j in range(labyrinthSize):
+            if (j, i) in solutionPath:
+                print("1 ", end="")
+            else:
+                print("0 ", end="")
+        print("")
 
-def buildCandidates(path, labyrinth, start, exit):
-    xCoordinate = start[0]
-    yCoordinate = start[1]
+def isSolutionValid(path, labyrinth, k, exit):
+    return path[k] == exit
+
+def buildCandidates(path, labyrinth, k, exit):
+    xCoordinate = path[k-1][0]
+    yCoordinate = path[k-1][1]
     
     candidates = []
 
-    if(xCoordinate+1 < len(labyrinth)-1):
+    if(xCoordinate+1 < len(labyrinth)):
         if(labyrinth[yCoordinate][xCoordinate+1] == 1):
             candidates.append((xCoordinate+1, yCoordinate))
-    if(yCoordinate+1 < len(labyrinth)-1):
+    if(yCoordinate+1 < len(labyrinth)):
         if(labyrinth[yCoordinate+1][xCoordinate] == 1):
             candidates.append((xCoordinate, yCoordinate+1))
 
     return candidates
 
-def labyrinthBacktrack(path, labyrinth, start, exit):
+def labyrinthBacktrack(path, labyrinth, k, exit):
     cadidatesForNextMove = []
 
-    if(isSolutionValid(labyrinth, start, exit)):
-        printSolution(path)
+    if(isSolutionValid(path, labyrinth, k, exit)):
+        printSolution(path, labyrinth)
     else:
-        start += 1
-        candidatesForNextMove = buildCandidates(path, labyrinth, start, exit)
+        k += 1
+        candidatesForNextMove = buildCandidates(path, labyrinth, k, exit)
         for candidate in candidatesForNextMove:
             path.append(candidate)
-            labyrinthBacktrack(path, labyrinth, start, exit)
+            labyrinthBacktrack(path, labyrinth, k, exit)
+            path.pop()
 
 
 if __name__ == "__main__":
@@ -53,6 +63,6 @@ if __name__ == "__main__":
     printLabyrinth(testLabyrinth)
 
     labyrinthSize = len(testLabyrinth)
-    path = []
+    path = [(0, 0)]
 
-    labyrinthBacktrack(path, testLabyrinth, (0, 0), (labyrinthSize - 1, labyrinthSize - 1))
+    labyrinthBacktrack(path, testLabyrinth, 0, (labyrinthSize - 1, labyrinthSize - 1))

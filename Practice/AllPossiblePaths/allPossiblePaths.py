@@ -53,4 +53,4 @@ def allPossiblePaths(matrix, path, k):
 
 if __name__ == "__main__":
     path = []
-    allPossiblePaths(testMatrix2, path, 0)
+    allPossiblePaths(testMatrix, path, 0)

@@ -136,8 +136,6 @@ def buildCandidates(mat,string,k,x,y):
 
     return coordinates         
 
-        
-
 
 
 def backtrack(mat,path,k,string,x,y):
@@ -154,16 +152,19 @@ def backtrack(mat,path,k,string,x,y):
             if(i%2==0):
                 y=candidates[i]
                 x=candidates[i+1]
+            else:
+                i+=1
+                y=candidates[i]
+                x=candidates[i+1]
             path[y][x]=k
-            #printMat(path)
+            printMat(path)
             backtrack(mat,path,k,string,x,y)
             path[y][x]=0
-            #printMat(path)
+            printMat(path)        
 
-            
 
 if __name__=="__main__":
-  
+    
     string="hello"
     x=y=0
     backtrack(mat,path,0,string,x,y)

@@ -36,7 +36,7 @@ def buildCandidates(matrix, path, k, targetWord):
         for i in range(len(matrix)):
             for j in range(len(matrix[i])):
                 if(matrix[i][j] == targetWord[0]):
-                    candidates.append((j, i))
+                    candidates.append((i, j))
     else:
         xCoord = path[k-2][0]
         yCoord = path[k-2][1]

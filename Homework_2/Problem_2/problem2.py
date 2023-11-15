@@ -23,16 +23,9 @@ def displayChessboard(chessboard):
     print("--------------------")
 
 def isSolutionValid(chessboard, k, n):
-    if k < n:
-        return False
-    
-    for row in chessboard:
-        if not any(row):
-            return False
+    return k == n
 
-    return True
-
-def buildCandidates(chessboard, k, n, candidatesList):
+def buildCandidates(chessboard, k, n):
     tempCandidates = [True for x in range(n)]
 
     for i in range(k-1):
@@ -47,11 +40,9 @@ def buildCandidates(chessboard, k, n, candidatesList):
                     tempCandidates[leftDiagonal] = False
                 break
 
-    candidatesList.extend(tempCandidates)
+    return tempCandidates
 
 def tooManyQueensBacktrack(chessboard, k, n):
-    candidatesForNextRow = []
-
     solutionsCount = 0
 
     if(isSolutionValid(chessboard, k, n)):
@@ -59,11 +50,12 @@ def tooManyQueensBacktrack(chessboard, k, n):
         solutionsCount += 1
     elif k < n:
         k = k + 1
-        buildCandidates(chessboard, k, n, candidatesForNextRow)
+        candidatesForNextRow = buildCandidates(chessboard, k, n)
         for i in range(len(candidatesForNextRow)):
-            chessboard[k-1][i] = candidatesForNextRow[i]
-            solutionsCount += tooManyQueensBacktrack(chessboard, k, n)
-            chessboard[k-1][i] = False        
+            if(candidatesForNextRow[i]):
+                chessboard[k-1][i] = True
+                solutionsCount += tooManyQueensBacktrack(chessboard, k, n)
+                chessboard[k-1][i] = False        
 
     return solutionsCount
 

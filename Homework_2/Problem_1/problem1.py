@@ -9,15 +9,13 @@ def maxCrossSum(array, start, middle, end):
 
     for i in range(middle, -1, -1):
         tmpSum += array[i]
-        if(leftCrossingSum < tmpSum):
-            leftCrossingSum = tmpSum
+        leftCrossingSum = max(leftCrossingSum, tmpSum)
 
     tmpSum = 0
 
     for i in range(middle, end+1):
         tmpSum += array[i]
-        if(rightCrossingSum < tmpSum):
-            rightCrossingSum = tmpSum
+        rightCrossingSum = max(rightCrossingSum, tmpSum)
 
     return max(leftCrossingSum + rightCrossingSum - array[middle], leftCrossingSum, rightCrossingSum)
 

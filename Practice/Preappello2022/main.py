@@ -1,14 +1,15 @@
 testProblem = [[8,5,3,2], [3,4,7,6]]
-#testProblem = [[2,5,3,9,12,4], [1,7,2,4,3,10]]
+testProblem = [[2,5,3,9,12,4], [1,7,2,4,3,10]]
 associationList = []
 
-dp = {}
 counter = 0
 
 def findMaxLinks(possibleLinks : list):
     possibleLinks.sort()
 
-    return maxLinksDP(possibleLinks, len(possibleLinks)-1)
+    dp = [-1]*len(possibleLinks)
+
+    return maxLinksDP(possibleLinks, len(possibleLinks)-1, dp)
 
 '''
 Spiegazione: se si ordinano le source in ordine crescente,
@@ -30,7 +31,7 @@ il maggior numero di collegamenti che non si intersecano,
 perché sono tutti con S>S' and D>D'.
 '''
 
-def maxLinksDP(possibleLinks, n):
+def maxLinksDP(possibleLinks, n, dp):
     if n == 0:
         return 1
 
@@ -38,7 +39,11 @@ def maxLinksDP(possibleLinks, n):
     lastGreatestValue = -1
 
     for i in range(n):
-        iMaximum = maxLinksDP(possibleLinks, i)
+        if(dp[i] != -1):
+            iMaximum = dp[i]
+        else: 
+            iMaximum = maxLinksDP(possibleLinks, i, dp)
+        
         if (iMaximum > maximum):
             maximum = iMaximum
             lastGreatestValue = possibleLinks[i][1]

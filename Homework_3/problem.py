@@ -1,5 +1,14 @@
+# -------------------ATTENZIONE---------------------------
+# 
+# La descrizione dettagliata dell'algortimo e 
+# dell'analisi di complessità si trovano nel PDF.
+# 
+# --------------------------------------------------------
+
+# Sentinella
 POSITIVE_INFINITY = 9e10
 
+# Funzione Minimum Distance From Sum (Knapasack modificato) - θ(n*totalSum) [pseudopolinomiale]
 def minimumDistanceFromSum(array, n, cumulativeSum, totalSum, dp):
     if(n == 0):
         return abs(totalSum - 2*cumulativeSum)
@@ -14,19 +23,21 @@ def minimumDistanceFromSum(array, n, cumulativeSum, totalSum, dp):
 
     return dp[n-1][cumulativeSum]
 
+# Chiamante della funzione ricorsiva
 def findMinimumDistanceFromSum(array):
     arraySum = sum(array)
     arrayLength = len(array)
 
     dp = [
-        [-1 for _ in range(arraySum+1)]
-        for _ in range(arrayLength + 1)
+        [-1 for _ in range(arraySum)]
+        for _ in range(arrayLength)
     ]
 
     minimumSum = minimumDistanceFromSum(array, arrayLength, 0, arraySum, dp)
 
     return minimumSum
 
+# Costruttore di test case da file
 def readTestFile(testPath):
     testFile = open(testPath)
 
@@ -40,7 +51,7 @@ def readTestFile(testPath):
 
     return testList
 
-
+# Main
 if __name__ == "__main__":
     testList = readTestFile("test.txt")
 

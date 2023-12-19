@@ -1,18 +1,18 @@
 def optimizeDeC(pivots, i, j, dp):
-    filteredPivots = [p for p in pivots if i < p < j]
-    if(not any(filteredPivots)):
-       return 0
+    if not(any([p for p in pivots if i < p < j])):
+        return 0
 
     if(dp[i][j] != -1):
         return dp[i][j]
 
-    minimumCost = (j-i) + optimizeDeC(pivots, i, filteredPivots[0], dp) + optimizeDeC(pivots, filteredPivots[0], j, dp)
+    minimumCost = 10e5
 
-    for k in range(1, len(filteredPivots)):
-        minimumCost = min(
-            minimumCost,
-            (j-i) + optimizeDeC(pivots, i, filteredPivots[k], dp) + optimizeDeC(pivots, filteredPivots[k], j, dp)
-        )
+    for pivot in pivots:
+        if i < pivot < j:
+            minimumCost = min(
+                minimumCost,
+                (j-i) + optimizeDeC(pivots, i, pivot, dp) + optimizeDeC(pivots, pivot, j, dp)
+            )
 
     dp[i][j] = minimumCost
     return dp[i][j]
